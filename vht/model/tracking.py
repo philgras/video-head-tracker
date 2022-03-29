@@ -1166,9 +1166,9 @@ class FlameTracker:
 
         export_dict["image_size"] = np.array(self._image_size)
         fname = fname if fname is not None else "tracked_flame_params.npz"
-        bytesbuffer = io.BytesIO()
-        np.savez(bytesbuffer, **export_dict)
-        # with fsspec.open(self._out_dir / fname, "wb") as f:
+        np.savez(self._out_dir / fname, **export_dict)
+        # bytesbuffer = io.BytesIO()
+        # with fsspec.open( "wb") as f:
         #    f.write(bytesbuffer.getvalue())
 
         # save tracking animation
