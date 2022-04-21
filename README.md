@@ -55,7 +55,16 @@ keyframes = [90, 415, 434, 193] --> list of frames used to optimize shape, textu
 The optimized parameters are stored in the output directory as ```tracked_flame_params.npz```.
 
 ## License
-[TODO]
+The code is available for non-commercial scientific research purposes under the 
+[CC BY-NC 3.0 license](https://creativecommons.org/licenses/by-nc/3.0/legalcode).
+ Please note that the files [flame.py](./nha/models/flame.py) and [lbs.py](./nha/util/lbs.py) 
+ are heavily inspired by https://github.com/HavenFeng/photometric_optimization and are property 
+ of the Max-Planck-Gesellschaft zur Förderung der Wissenschaften e.V. 
+ The download, use, and distribution of this code is subject to this
+ [license](https://github.com/vchoutas/smplx/blob/master/LICENSE). 
+ The files that can be found in the [./assets](./assets) directory, 
+ are adapted from the [FLAME head model](https://flame.is.tue.mpg.de) 
+ for which the license can be found [here](https://flame.is.tue.mpg.de/modellicense.html).
 
 ## Citation 
 **If you find our work useful, please include the following citation:**
