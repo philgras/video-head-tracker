@@ -1,9 +1,9 @@
 from vht.model.flame import FlameHead, FlameTex
+from vht.model.lbs import batch_rodrigues
 from vht.util.general import blur_tensors, DecayScheduler
 from vht.util.graphics import (
     calibrate_camera,
     calibrate_extrinsics,
-    batch_rodrigues,
     normalize_image_points,
 )
 from vht.util.render import SHRenderer, create_camera_objects
