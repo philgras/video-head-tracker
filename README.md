@@ -2,12 +2,12 @@
 
 ![Teaser image](./assets/misc/title.png)
 <br><br>
-A Python library for tracking a human head across a video sequence with
-[FLAME](https://flame.is.tue.mpg.de/) (a 3D morphable head model) in 3D.
+3D tracking library for human heads based on
+[FLAME](https://flame.is.tue.mpg.de/) (a 3D morphable head model).
 The tracking algorithm is inspired by [face2face](https://openaccess.thecvf.com/content_cvpr_2016/papers/Thies_Face2Face_Real-Time_Face_CVPR_2016_paper.pdf).
 It determines FLAMEs shape and texture parameters as well as spherical harmonics lights and
-camera intrinsics for the whole sequence. Afterwards, expressions and poses (rigid, neck, jaw, eyes)
-are optimized for each frame. The only inputs are an RGB video together with facial and iris landmarks.
+camera intrinsics for a video sequence. Afterwards, expressions and poses (rigid, neck, jaw, eyes)
+are optimized for each frame of the video. The only inputs are an RGB video together with facial and iris landmarks.
 The latter is estimated by our code automatically.
 
 This repository complements the code release of the CVPR2022 paper
