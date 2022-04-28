@@ -26,19 +26,20 @@ def id2view(view_id):
 
 
 class VideoDataset(Dataset):
-    def __init__(self, path, res):
+    def __init__(self, path, scale_factor=1.0):
         """
         :param path: Path to dataset with the following directory layout
             root/
             |---frame_1/
             |   |---image_0000.png
             |   |---keypoints_static.npz
-        :param res: frames will be scaled to that resolution and landmarks accordingly
+        :param scale_factor: frames input resolution will be scaled by that factor. landmarks
+                    are scaled accordingly
         """
 
         super().__init__()
         self._path = Path(path)
-        self._scale = res
+        self._scale = scale_factor
 
         self._views = []
         frames = [f for f in os.listdir(self._path) if f.startswith("frame_")]
@@ -56,7 +57,6 @@ class VideoDataset(Dataset):
         Get i-th sample from the dataset.
         """
 
-        target_H, target_W = self._scale
         view = self._views[i]
         frame_path = view.parent
         sample = {}
@@ -66,7 +66,8 @@ class VideoDataset(Dataset):
 
         rgba = ttf.to_tensor(Image.open(view).convert("RGBA"))
         H, W = rgba.shape[1:]
-        rgba = ttf.resize(rgba, self._scale, antialias=True)
+        target_H, target_W = int(H / self._scale), int(W / self._scale)
+        rgba = ttf.resize(rgba, (target_H, target_W), antialias=True)
         sample["rgb"] = (rgba[:3] - 0.5) / 0.5
 
         # landmarks

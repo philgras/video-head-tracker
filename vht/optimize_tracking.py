@@ -18,7 +18,13 @@ def main():
     parser.add_argument("--config", required=True, is_config_file=True)
     parser.add_argument("--data_path", required=True)
     parser.add_argument("--video", required=False)
-    parser.add_argument("--tracking_resolution", type=int, nargs=2, required=True)
+    parser.add_argument(
+        "--downscale_factor",
+        type=float,
+        default=1.0,
+        help="Factor by which the input video is scaled to a lower resolution."
+        " Mind that final pixel resolution is rounded to integer numbers.",
+    )
 
     args = parser.parse_args()
     args_dict = vars(args)
@@ -34,7 +40,9 @@ def main():
         f" configuration: \n {parser.format_values()}"
     )
 
-    data = VideoDataset(args.data_path, args.tracking_resolution)
+    if args.downscale_factor < 1.0:
+        raise ValueError("Downscale factor of inputs is supposed to be >= 1.")
+    data = VideoDataset(args.data_path, args.downscale_factor)
     tracker = Tracker(data, **args_dict)
     tracker.optimize()
 
