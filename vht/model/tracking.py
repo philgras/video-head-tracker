@@ -377,7 +377,7 @@ class FlameTracker:
         if self._calibrated:
             assert "cam_intrinsic" in sample and "cam_extrinsic" in sample
         else:
-            b, _, w, h = sample["rgb"].shape
+            b, _, h, w = sample["rgb"].shape
             K = torch.eye(3, 3).to(self._device)
 
             # denormalize cam params
@@ -546,7 +546,7 @@ class FlameTracker:
             K = np.array([f, 0, img_w / 2, 0, f, img_h / 2, 0, 0, 1.0]).reshape(3, 3)
 
             error, new_K, dist, rs, ts = calibrate_camera(
-                world_pts, img_pts, image_size=(img_h, img_w), K=K, ignore_dist=True
+                world_pts, img_pts, image_size=(img_w, img_h), K=K, ignore_dist=True
             )
 
             # normalize cam inputs by image size
